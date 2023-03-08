@@ -6,7 +6,7 @@
 /*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:44:41 by mozer             #+#    #+#             */
-/*   Updated: 2023/03/08 14:03:45 by mozer            ###   ########.fr       */
+/*   Updated: 2023/03/08 15:52:14 by mozer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,7 @@ void add(PhoneBook *kisi)
     std::getline(std::cin, kisi->person[kisi->count].secret);
     if (kisi->person[kisi->count].name.empty() || kisi->person[kisi->count].surName.empty() || kisi->person[kisi->count].nickName.empty() || kisi->person[kisi->count].secret.empty())
         return ;
-
-
-
+        
     kisi -> count++;
 
     //! empty() fonksiyonu değiskenin içerisinde veri olup olmadığını kontrol eder veri yok ise true döner    
@@ -61,7 +59,7 @@ void search(PhoneBook *kisi)
         return ;
     }
 
-    std::cout<<"\033[1;92mListe\033[0m" << std::endl;
+    std::cout<<"\033[1;92mListe Yükleniyor... \033[0m";
 
     
     while(LOADING[i]){
@@ -71,20 +69,24 @@ void search(PhoneBook *kisi)
     }
     std::cout<< "\n";
     
+    std::cout << SEPERATOR
+    << "| " << std::right << std::setw(10) << "ID"
+    << "| " << std::right << std::setw(10) << "Isim"
+    << "| " << std::right << std::setw(10) << "Soyisim"
+    << "| " << std::right << std::setw(10) << "Rumuz"
+    << "| " << std::endl << SEPERATOR;
     while(kisi->count > j)
     {
         std::cout << SEPERATOR
-
         << "| " << std::right << std::setw(10) << j
-        << "| " << std::right << (kisi->person[j].name.length() > 10 ? kisi->person[j].name.substr(0,9) + '.' : kisi->person[j].name)
-        << "| " << std::right << (kisi->person[j].surName.length() > 10 ? kisi->person[j].surName.substr(0,9) + '.' : kisi->person[j].surName)
-        << "| " << std::right << (kisi->person[j].nickName.length() > 10 ? kisi->person[j].nickName.substr(0,9) + '.' : kisi->person[j].nickName)
+        << "| " << std::right << std::setw(10) <<(kisi->person[j].name.length() > 10 ? kisi->person[j].name.substr(0,9) + '.' : kisi->person[j].name)
+        << "| " << std::right << std::setw(10) <<(kisi->person[j].surName.length() > 10 ? kisi->person[j].surName.substr(0,9) + '.' : kisi->person[j].surName)
+        << "| " << std::right << std::setw(10) <<(kisi->person[j].nickName.length() > 10 ? kisi->person[j].nickName.substr(0,9) + '.' : kisi->person[j].nickName)
         << "| " << std::endl << SEPERATOR;
         j++;       
     }
 
     std::cout << " Kisi ID Girin: ";
-    //std::cin >> controller;
     std::getline(std::cin, tmp_kisi);
     
     std::istringstream my_stream(tmp_kisi);
