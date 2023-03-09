@@ -6,7 +6,7 @@
 /*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:44:44 by mozer             #+#    #+#             */
-/*   Updated: 2023/03/09 12:21:45 by mozer            ###   ########.fr       */
+/*   Updated: 2023/03/09 15:38:05 by mozer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ class Contact{
 
 class PhoneBook{
     public :
-        Contact person[8];
+        Contact person[9];
         int count;
         int swap;
 

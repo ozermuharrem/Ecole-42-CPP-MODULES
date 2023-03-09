@@ -6,7 +6,7 @@
 /*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:44:41 by mozer             #+#    #+#             */
-/*   Updated: 2023/03/09 14:16:37 by mozer            ###   ########.fr       */
+/*   Updated: 2023/03/09 15:36:00 by mozer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void message()
 
 void add(PhoneBook *kisi)
 {
-    if(kisi->count >= 8)
+    if(kisi->count >= 9)
     {
         kisi->swap = kisi->count;
         kisi->count = 1;
