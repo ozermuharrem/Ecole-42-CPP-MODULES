@@ -6,7 +6,7 @@
 /*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:44:41 by mozer             #+#    #+#             */
-/*   Updated: 2023/03/08 15:52:14 by mozer            ###   ########.fr       */
+/*   Updated: 2023/03/09 14:16:37 by mozer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,12 @@ void message()
 
 void add(PhoneBook *kisi)
 {
-    if(kisi->count >= 7)
-        kisi->count = 7;
+    if(kisi->count >= 8)
+    {
+        kisi->swap = kisi->count;
+        kisi->count = 1;
+        
+    }
     std::cout << "\033[1;92mKisi Bilgilerini Giriniz\033[0m" << std::endl;
     std :: cout << "Isim: ";
     std::getline(std::cin, kisi->person[kisi->count].name);
@@ -45,11 +49,11 @@ void add(PhoneBook *kisi)
 void search(PhoneBook *kisi)
 {
     int i = 0;
-    int j = 0;
+    int j = 1;
     int controller;
-    std::string filler;
+  
     std::string tmp_kisi;
-    Contact p2;
+
 
     if(std::cin.eof() == 1)
         exit(0);
@@ -64,10 +68,13 @@ void search(PhoneBook *kisi)
     
     while(LOADING[i]){
         std::cout << LOADING[i]<< std::flush; // standart output un buffer ini boşaltır 
-        usleep(50000);
+        usleep(30000);
         i++;
     }
     std::cout<< "\n";
+
+   if(kisi->count < kisi->swap)
+        kisi->count = kisi->swap;
     
     std::cout << SEPERATOR
     << "| " << std::right << std::setw(10) << "ID"
@@ -75,8 +82,9 @@ void search(PhoneBook *kisi)
     << "| " << std::right << std::setw(10) << "Soyisim"
     << "| " << std::right << std::setw(10) << "Rumuz"
     << "| " << std::endl << SEPERATOR;
+
     while(kisi->count > j)
-    {
+        {
         std::cout << SEPERATOR
         << "| " << std::right << std::setw(10) << j
         << "| " << std::right << std::setw(10) <<(kisi->person[j].name.length() > 10 ? kisi->person[j].name.substr(0,9) + '.' : kisi->person[j].name)
@@ -93,23 +101,25 @@ void search(PhoneBook *kisi)
 
     if(!(my_stream >> controller))
     {
-        std::cout<< "Gecerli bir numara girin ";
+        std::cout<< "Gecerli bir numara girin \n";
         return ;
     }
-    if(controller >= 9 || controller <= 0)
+    
+    if(controller > 8 || controller < 1)
     {
         std::cout << "Olmayan Birisi Olamaz" << std::endl;
         return ;
     }
 
-    if(kisi->count >= j && (j <= 8 && j >= 1) && j >= controller)
+    if(kisi->count >= j && (j <= 8 && j >= 1) && j >= controller && (!(kisi->person[controller].name.empty()) || \
+        !(kisi->person[controller].surName.empty()) || !(kisi->person[controller].nickName.empty())))
     {
         std::cout << "\033[1;95mInformation -> \033[0m" << controller <<std::endl;
-        std::cout << "Isim: " << kisi->person[controller - 1].name << std::endl;
-        std::cout << "Soyisim: " << kisi->person[controller - 1].surName << std::endl;
-        std::cout << "Rumuz: " << kisi->person[controller - 1].nickName << std::endl;
-        std::cout << "TelNum: " << kisi->person[controller - 1].telNum << std::endl;
-        std::cout << "Gizli Sir: " << kisi->person[controller - 1].secret << std::endl;
+        std::cout << "Isim: " << kisi->person[controller].name << std::endl;
+        std::cout << "Soyisim: " << kisi->person[controller].surName << std::endl;
+        std::cout << "Rumuz: " << kisi->person[controller].nickName << std::endl;
+        std::cout << "TelNum: " << kisi->person[controller].telNum << std::endl;
+        std::cout << "Gizli Sir: " << kisi->person[controller].secret << std::endl;
     }
     else
         std::cout<<"We haven't been there yet" << std::endl;
@@ -118,13 +128,16 @@ void search(PhoneBook *kisi)
 int main()
 {
    PhoneBook employe;
-   employe.count = 0;
+   employe.count = 1;
+   employe.swap = 1;
 
    std::string str;
  
     message();
-    while(std::getline(std::cin,str))
-    {      
+    while(1)
+    {     
+        std::getline(std::cin,str);
+        
         if(str.compare("ADD") == 0)
             add(&employe);
         else if(str.compare("SEARCH") == 0)

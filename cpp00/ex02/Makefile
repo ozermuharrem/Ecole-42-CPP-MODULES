@@ -6,11 +6,11 @@
 #    By: mozer <mozer@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/07 14:44:38 by mozer             #+#    #+#              #
-#    Updated: 2023/03/09 12:18:17 by mozer            ###   ########.fr        #
+#    Updated: 2023/03/09 14:18:39 by mozer            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = PhoneBook
+NAME = Account
 CC = c++
 FLAG = -Wall -Werror -Wextra -std=c++98
 
