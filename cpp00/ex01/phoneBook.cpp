@@ -14,8 +14,8 @@
 
 void message()
 {
-    std::cout<< "\033[32m Seçim Yapınız -----> ADD, SEARCH, EXIT \033[0m" << std::endl;
-    std::cout<< "\033[32m Seçiçiminiz Nedir ?  \033[0m" ;
+    std::cout<< "\033[32m Secim Yapiniz -----> ADD, SEARCH, EXIT \033[0m" << std::endl;
+    std::cout<< "\033[32m Seciciminiz Nedir ?  \033[0m" ;
 }
 
 void add(PhoneBook *kisi)
@@ -105,13 +105,13 @@ void search(PhoneBook *kisi)
         return ;
     }
     
-    if(controller > 8 || controller < 1)
+    if(controller > 9 || controller < 1)
     {
-        std::cout << "Olmayan Birisi Olamaz" << std::endl;
+        std::cout << "Lutfen Gecerli Bir ID Girin" << std::endl;
         return ;
     }
 
-    if(kisi->count >= j && (j <= 8 && j >= 1) && j >= controller && (!(kisi->person[controller].name.empty()) || \
+    if(kisi->count >= j && (j <= 9 && j >= 1) && j >= controller && (!(kisi->person[controller].name.empty()) || \
         !(kisi->person[controller].surName.empty()) || !(kisi->person[controller].nickName.empty())))
     {
         std::cout << "\033[1;95mInformation -> \033[0m" << controller <<std::endl;
