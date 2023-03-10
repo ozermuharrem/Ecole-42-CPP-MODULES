@@ -6,7 +6,7 @@
 /*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/07 14:44:41 by mozer             #+#    #+#             */
-/*   Updated: 2023/03/09 15:36:00 by mozer            ###   ########.fr       */
+/*   Updated: 2023/03/10 12:01:04 by mozer            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ void search(PhoneBook *kisi)
         return ;
     }
 
-    if(kisi->count >= j && (j <= 9 && j >= 1) && j >= controller && (!(kisi->person[controller].name.empty()) || \
+    if(kisi->count >= j && (j < 9 && j >= 1) && j >= controller && (!(kisi->person[controller].name.empty()) || \
         !(kisi->person[controller].surName.empty()) || !(kisi->person[controller].nickName.empty())))
     {
         std::cout << "\033[1;95mInformation -> \033[0m" << controller <<std::endl;
