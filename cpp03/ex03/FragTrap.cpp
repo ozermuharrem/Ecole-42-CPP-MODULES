@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/06 10:19:21 by mozer             #+#    #+#             */
+/*   Updated: 2023/04/06 10:19:22 by mozer            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "FragTrap.hpp"
 
 FragTrap::FragTrap(){
@@ -23,16 +35,4 @@ FragTrap::~FragTrap(){
 void FragTrap::highFivesGuys()
 {
     std::cout << this->getName() << " High Five Guys called " << std::endl;
-}
-
-void FragTrap::attack(const std::string& target)
-{
-    if ((this->getHitScore() != 0 || this->getEnergyScore() != 0) && (this->getHitScore() > 0 && this->getEnergyScore() > 0))
-    {
-        std::cout << "FlagTrap " << this->getName() << " attacks " << target
-        << " causing " << this->getAttackDamage() << " points of damage! " << std::endl;
-        setEnergyScore(getEnergyScore() - 1);
-    }
-    else
-        std::cout << "FragTrap " << this->getName() << "doesn't have hitPoints or Energy" << std::endl;
 }

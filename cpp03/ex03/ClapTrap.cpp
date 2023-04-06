@@ -13,7 +13,7 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(){
-    std::cout<< "Constrator Create" << std::endl;
+    std::cout<< "Claptrap default Constructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name){
@@ -21,11 +21,11 @@ ClapTrap::ClapTrap(std::string name){
     this->setHitScore(10);
     this->setEnergyScore(10);
     this->setAttackDamage(0);
-    std::cout<< this->_name << " created"<<std::endl;
+    std::cout<< "ClapTrap "<<this->_name << " Claptrap Constructor"<<std::endl;
 }
 
 ClapTrap::~ClapTrap(){
-    std::cout<< this->_name << " destroyed"<< std::endl;
+    std::cout<< this->getName() << " ClapTrap  destroyed"<< std::endl;
 }
 
 void ClapTrap::setName(std::string name){

@@ -14,10 +14,10 @@
 
 ScavTrap::ScavTrap()
 {
-    std::cout << "Default Constractor Created" << std::endl;
+    std::cout << "ScavTrap Default Constructor Created" << std::endl;
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::ScavTrap(std::string name) : ClapTrap(name)
 {
     this->setName(name);
     this->setHitScore(100);
