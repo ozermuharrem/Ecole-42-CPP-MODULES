@@ -14,7 +14,7 @@
 
 ScavTrap::ScavTrap()
 {
-    std::cout << "Default Constractor Created" << std::endl;
+    std::cout << "Default ScavTrap Constractor Created" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string name)

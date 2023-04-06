@@ -5,28 +5,30 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mozer <mozer@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/03/10 12:33:04 by mozer             #+#    #+#              #
-#    Updated: 2023/03/21 11:01:29 by mozer            ###   ########.fr        #
+#    Created: 2023/04/05 10:10:30 by mozer             #+#    #+#              #
+#    Updated: 2023/04/05 14:52:47 by mozer            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Zombie
+NAME = FragTrap
 CC = c++
-FLAG = -Wall -Werror -Wextra -std=c++98
+CLAFGS = -Wall -Wextra -Werror
+SRCS = $(wildcard *.cpp)
+OBJ = $(SRCS:.cpp = .o)
 
-all : 
-	@$(CC) *.cpp $(FLAG) -o $(NAME)
-	@echo "\033[1;32m     [OK]"
-	
-clean : 
-		@echo "\033[1;35m[🧹...Temizlendi...🧹]"
-		@rm -rf $(NAME)
-		@rm -rf $(NAME).dSYM
+$(NAME): $(OBJ)
+	@$(CC) $(CLAFGS) $(SRCS) -o $(NAME)
+	@echo "\033[1;32m     [OK]\033[0m"
 
-fclean : clean
-		@rm -rf $(NAME)
-		@rm -rf $(NAME).dSYM
+all: $(NAME)
 
-re : fclean all
+clean:
+	@rm -rf  $(NAME)
+	@echo "\033[1;35m[🧹...Temizlendi...🧹]\033[0m"
+
+fclean: clean
+
+
+re: fclean all
 
 .PHONY: all clean fclean re
