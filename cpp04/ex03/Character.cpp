@@ -45,7 +45,7 @@ Character::~Character()
             delete this->_inventory[i];
 }
 
-void    Character::equip( Amateria* m ) {
+void    Character::equip( AMateria* m ) {
     for (int i = 0; i < 4; i++)
         if (this->_inventory[i] == NULL)
         {

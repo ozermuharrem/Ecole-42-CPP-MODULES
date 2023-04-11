@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = AMaterial
+NAME = Interface
 CC = c++
 CLAFGS = -Wall -Wextra -Werror -Wshadow -std=c++98
 SRCS = $(wildcard *.cpp)

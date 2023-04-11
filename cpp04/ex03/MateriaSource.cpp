@@ -40,7 +40,7 @@ MateriaSource& MateriaSource::operator=( MateriaSource const & rhs )
     return *this;
 }
 
-Amateria* MateriaSource::getMateria( std::string const & type )
+AMateria* MateriaSource::getMateria( std::string const & type )
 {
     for (int i = 0; i < 4; i++)
         if (materias[i] && materias[i]->getType() == type)
@@ -48,17 +48,18 @@ Amateria* MateriaSource::getMateria( std::string const & type )
     return NULL;
 }
 
-void    MateriaSource::learnMateria( Amateria* m )
+void    MateriaSource::learnMateria( AMateria* m )
 {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 4; i++){
         if (materias[i] == NULL)
         {
             materias[i] = m;
             return;
         }
+    }
 }
 
-Amateria*   MateriaSource::createMateria( std::string const& type ) {
+AMateria*   MateriaSource::createMateria( std::string const& type ) {
     for ( int i = 0; i < 4; i++ )
         if ( materias[i] && materias[i]->getType() == type )
             return materias[i]->clone();

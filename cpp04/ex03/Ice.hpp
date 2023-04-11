@@ -1,9 +1,9 @@
 #ifndef ICE_HPP
 #define ICE_HPP
 
-#include "Amateria.hpp"
+#include "AMateria.hpp"
 
-class Ice : public Amateria
+class Ice : public AMateria
 {
 
     public:
@@ -13,7 +13,7 @@ class Ice : public Amateria
         Ice( Ice const & );
         Ice& operator=( Ice const & );
 
-        virtual Amateria*   clone() const;
+        virtual AMateria*   clone() const;
         virtual void        use(ICharacter& target);
 };
 

@@ -1,11 +1,11 @@
 #include "Ice.hpp"
 
-Ice::Ice() : Amateria("ice")
+Ice::Ice() : AMateria("ice")
 {
     // std::cout << "* Ice: materia is created *" << std::endl;
 }
 
-Ice::Ice( Ice const & src ) : Amateria("ice")
+Ice::Ice( Ice const & src ) : AMateria("ice")
 {
     *this = src;
     // std::cout << "* Ice: materia is copied *" << std::endl;
@@ -24,7 +24,7 @@ Ice::~Ice()
     // std::cout << "* Ice: ice is destroyed *" << std::endl;
 }
 
-Amateria* Ice::clone() const
+AMateria* Ice::clone() const
 {
     return (new Ice(*this));
 }

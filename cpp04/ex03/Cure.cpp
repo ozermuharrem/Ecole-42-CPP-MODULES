@@ -1,11 +1,11 @@
 #include "Cure.hpp"
 
-Cure::Cure( void ) : Amateria("cure")
+Cure::Cure( void ) : AMateria("cure")
 {
     // std::cout << "* Cure: materia is created *" << std::endl;
 }
 
-Cure::Cure( Cure const & src ) : Amateria("cure")
+Cure::Cure( Cure const & src ) : AMateria("cure")
 {
     *this = src;
     // std::cout << "* Cure: materia is copied *" << std::endl;
@@ -24,7 +24,7 @@ Cure::~Cure()
     // std::cout << "* Ice: cure is destroyed *" << std::endl;
 }
 
-Amateria* Cure::clone() const
+AMateria* Cure::clone() const
 {
     return (new Cure(*this));
 }
