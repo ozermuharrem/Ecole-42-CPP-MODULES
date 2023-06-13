@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mkardes <mkardes@student.42kocaeli.com.tr  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/09 16:16:40 by mkardes           #+#    #+#             */
+/*   Updated: 2023/02/11 15:43:03 by mkardes          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(void): _name("Default"), _grade(150)
 {
@@ -22,7 +34,6 @@ Bureaucrat::Bureaucrat(const Bureaucrat &copy)
 
 Bureaucrat::~Bureaucrat()
 {
-	std::cout << "Bureaucrat 'destructed'" << std::endl;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
@@ -51,6 +62,19 @@ void    Bureaucrat::setGrade(int    grade)
 int     Bureaucrat::getGrade(void) const
 {
 	return (this->_grade);
+}
+
+void	Bureaucrat::signForm(AForm &a)
+{
+	try
+	{
+		a.beSigned(*this);
+		std::cout << this->_name << " signed " << a.getName() << std::endl;
+	}
+	catch(std::exception &e)
+	{
+		std::cout << this->_name << " couldn't sign " << a.getName() << " because " << e.what() << std::endl;
+	}
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const _NOEXCEPT

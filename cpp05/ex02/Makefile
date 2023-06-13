@@ -12,6 +12,7 @@ all: $(NAME)
 
 clean:
 	@rm -rf  $(NAME) *.dSYM
+	@rm -rf *_shrubbery
 	@echo "\033[1;35m[🧹...Temizlendi...🧹]\033[0m"
 
 fclean: clean

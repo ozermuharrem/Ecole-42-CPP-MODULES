@@ -3,72 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mozer <mozer@student.42.fr>                +#+  +:+       +#+        */
+/*   By: mkardes <mkardes@student.42kocaeli.com.tr  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/10 10:51:37 by mozer             #+#    #+#             */
-/*   Updated: 2023/05/12 15:23:21 by mozer            ###   ########.fr       */
+/*   Created: 2023/02/09 16:16:40 by mkardes           #+#    #+#             */
+/*   Updated: 2023/02/10 18:58:51 by mkardes          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-Bureaucrat::Bureaucrat(std::string name, int grade){
-    setName(name);
-    setGrade(grade);
-    std::cout<< this->getName() << std::endl;
-    
-}
-
-Bureaucrat::~Bureaucrat(){
-    std::cout<< this->getName() <<" Destroyed" << std::endl;
-}
-
-
-std::string Bureaucrat::getName(){
-    return this->_name;
-}
-int Bureaucrat::getGrade(){
-    return this->_grade;
-}
-
-// setter 
-void Bureaucrat::setName(std::string name){
-    this->_name = name;
-    
-}
-void Bureaucrat::setGrade(int grade){
-    this->_grade = grade;
-    if (grade < 1)
-        throw Bureaucrat::GradeTooHighException();
-    if (grade > 150)
-        throw Bureaucrat::GradeTooLowException();
-}
-
-const char *Bureaucrat::GradeTooLowException::what() const _NOEXCEPT
+Bureaucrat::Bureaucrat(void): _name("Default"), _grade(150)
 {
-    //this class mustn't throw because the function have _NOEXCEPT like throw();
-    return ("Too Low Exception");
 }
 
-const char *Bureaucrat::GradeTooHighException::what() const _NOEXCEPT
+Bureaucrat::Bureaucrat(std::string name, int grade): _name(name), _grade(grade)
 {
-    //this class mustn't throw because the function have _NOEXCEPT like throw();
-    return ("Too High Exception");
+	std::cout << "Bureaucrat 'constructed'." << std::endl;
+	if (_grade < 1)
+		throw (Bureaucrat::GradeTooHighException());
+	if (_grade > 150)
+        throw (Bureaucrat::GradeTooLowException());
 }
 
-void Bureaucrat::increment()
+Bureaucrat::Bureaucrat(const Bureaucrat &copy)
 {
-    this->_grade--;
+	*this = copy;
+	std::cout << "Bureaucrat's 'copy constructer' done." << std::endl;
 }
 
-void Bureaucrat::decrement()
+Bureaucrat::~Bureaucrat()
 {
-    this->_grade++;
+	std::cout << "Bureaucrat 'destructed'" << std::endl;
 }
 
-void Bureaucrat::signedForm(Form &a){ // 50 60 
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &copy)
+{
+	this->setName(copy.getName());
+	this->setGrade(copy.getGrade());
+	std::cout << "Byreaucrat 'copy assignment' operator done." << std::endl;
+	return *this;
+}
 
-try
+void    Bureaucrat::setName(std::string name)
+{
+	this->_name = name;
+}
+
+std::string Bureaucrat::getName(void) const
+{
+	return (this->_name);
+}
+
+void    Bureaucrat::setGrade(int    grade)
+{
+	this->_grade = grade;
+}
+
+int     Bureaucrat::getGrade(void) const
+{
+	return (this->_grade);
+}
+
+void	Bureaucrat::signForm(Form &a)
+{
+	try
 	{
 		a.beSigned(*this);
 		std::cout << this->_name << " signed " << a.getName() << std::endl;
@@ -79,12 +78,32 @@ try
 	}
 }
 
-std::ostream &operator<<(std::ostream &o, Bureaucrat &src)
+const char *Bureaucrat::GradeTooHighException::what() const _NOEXCEPT
 {
-    if (src.getGrade() == 1)
-        return (o << src.getName() << ", bureaucrat grade(MAX POINT) " << src.getGrade());
-    else if (src.getGrade() == 150)
-        return (o << src.getName() << ", bureaucrat grade(MIN POINT) " << src.getGrade());
-    else
-        return (o << src.getName() << ", bureaucrat grade " << src.getGrade());
+	return ("Grade is too HIGH!");
+}
+
+const char *Bureaucrat::GradeTooLowException::what() const _NOEXCEPT
+{
+    return ("Grade is too LOW!");
+}
+
+void	Bureaucrat::gradeUp(void)
+{
+	this->setGrade(this->getGrade() - 3);
+	if (_grade < 1)
+        throw (Bureaucrat::GradeTooHighException());
+}
+
+void    Bureaucrat::gradeDown(void)
+{
+    this->setGrade(this->getGrade() + 3);
+    if (_grade > 150)
+        throw (Bureaucrat::GradeTooLowException());
+}
+
+std::ostream & operator<<(std::ostream &o, Bureaucrat &s)
+{
+	o << s.getName() << ", bureaucrat grade " << s.getGrade() << std::endl;
+	return o;
 }
