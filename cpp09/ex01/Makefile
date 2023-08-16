@@ -6,7 +6,7 @@ SRCS = $(wildcard *.cpp)
 OBJ = $(SRCS:.cpp = .o)
 
 	ifeq ($(shell uname), Darwin)
-    	$(CLAFGS) += $(STD)
+		CLAFGS += $(STD)
 	endif
 $(NAME): $(OBJ)
 	@$(CC) $(CLAFGS) $(SRCS) -o $(NAME)
@@ -19,7 +19,6 @@ clean:
 	@echo "\033[1;35m[🧹...Temizlendi...🧹]\033[0m"
 
 fclean: clean
-
 
 re: fclean all
 
