@@ -17,7 +17,8 @@ class PmergeMeDeque
 		std::deque<int> dgData;
 		void	addToDeq(std::deque<int> &con,char **argv);
 		void	mergeDeq(std::deque<int>& deq, int left, int middle, int right);
-		void	mergeSortDeq(std::deque<int>& deq, int left, int right);
+		void	mergeSortDeq(std::deque<int>& deq, int left, int middle, int right);
+		void	mergeInsertionSortDeq(std::deque<int>& deq, int left, int right);
 		void	insertSortDeq(std::deque<int>& deq, int left, int right);
 		void	printDeque(std::deque<int> &pdeque);
 
@@ -32,8 +33,10 @@ class PmergeMeVec
 		PmergeMeVec &operator=(const PmergeMeVec &obj);
 		std::vector<int> vcData;
 		void	addToVector(std::vector<int> & vec,char **arg);
-		void	mergeSortVector(std::vector<int>& vec, int left, int right);
+		void	mergeSortVector(std::vector<int>& vec, int left, int middle, int right);
 		void    vectorInsertSort(std::vector<int>& vec, int left, int right);
+		void	mergeInsertionSortVec(std::vector<int>& vec, int left, int right);
+
 		void	printVec(std::vector<int> &pvector);
 };
 

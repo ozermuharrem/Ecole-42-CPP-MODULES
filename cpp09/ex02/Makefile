@@ -15,11 +15,20 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 clean:
-	@rm -rf  $(NAME) *.dSYM
+	@rm -rf  $(NAME) *.dSYM build
 	@echo "\033[1;35m[🧹...Temizlendi...🧹]\033[0m"
 
 fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+ifeq ($(shell uname), Darwin)
+test:
+	./$(NAME) `jot -r 3000 1 100000 | tr '\n' ' '`
+else
+test:
+	./$(NAME) `shuf -i 1-100000 -n 3000 | tr "\n" " "`
+endif
+
+
+.PHONY: all clean fclean re test
