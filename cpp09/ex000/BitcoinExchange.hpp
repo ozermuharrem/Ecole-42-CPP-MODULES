@@ -12,6 +12,8 @@ class BitcoinExchange{
         float _rate;
 		std::ifstream ifs;
         std::map<std::string, float> _dataMap;
+        std::map<int, std::pair<std::string , float> > _inputMap;
+
     public:
         BitcoinExchange();
         ~BitcoinExchange();
@@ -29,4 +31,5 @@ class BitcoinExchange{
 };
 
 
-void printMap(std::map<std::string, float> Map, std::string const &data,float const &rate);
+int findMap(std::map<std::string, float> Map, std::string const &data,float const &rate);
+std::string noData(std::string inputData, float rate);
