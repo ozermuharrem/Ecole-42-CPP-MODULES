@@ -1,30 +1,34 @@
-#ifndef BITCOINEXCHANGE_HPP
-#define BITCOINEXCHANGE_HPP
+#pragma once
 
 #include <iostream>
 #include <fstream>
-#include <ctime>
 #include "string.h"
-#include <cstdlib>
 #include <iomanip>
 #include <map>
 
-class BitcoinExchange
-{
-	public:
-		int curr_year;
-		int curr_month;
-		int curr_day;
-		
-		BitcoinExchange();
-		BitcoinExchange(const BitcoinExchange& copy);
-		BitcoinExchange &operator = (const BitcoinExchange& copy);
-		~BitcoinExchange();
+class BitcoinExchange{
+    private:
+        std::string _data;
+        float _rate;
+		std::ifstream ifs;
+        std::map<int, float> _dataMap;
+        std::map<int, std::pair<int , float> > _inputMap;
+
+    public:
+        BitcoinExchange();
+        ~BitcoinExchange();
+
+        BitcoinExchange(BitcoinExchange const &src);
+        BitcoinExchange &operator=(BitcoinExchange const &src);
+
+        std::string const &getData()const;
+        float const &getRate()const;
+
+        void setData(std::string const &data);
+        void setRate(float const &rate);
 
 		void rateCalculator(char *filename);
-
-		std::map<int, float> map;
-		std::ifstream ifs;
 };
 
-#endif
+
+void printData(std::string str, float arf);
