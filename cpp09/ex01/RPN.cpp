@@ -7,7 +7,7 @@ RPN::RPN()
 
 RPN::~RPN() {}
 
-void	RPN::my_checker(int argc, char **argv)
+void	RPN::my_checker(int argc, char **argv) // 7 7 * 7 -
 {
     if (argc != 2)
     {

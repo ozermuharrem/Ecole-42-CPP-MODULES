@@ -21,16 +21,6 @@ BitcoinExchange::BitcoinExchange(){
         this->_dataMap.insert(std::pair<int, float>(atoi(this->_data.c_str()), this->_rate));
 
     }
-
-//    std::map<int, float> ::iterator it = _dataMap.begin();
-//    int cnt = 0;
-//     for(; it != _dataMap.end() ; it++){
-//         if(cnt != 500)
-//             std::cout << it->first << " " << it->second << std::endl;
-//         else
-//             exit(1);
-//         cnt++;
-//     }
         
 }
 BitcoinExchange::~BitcoinExchange(){
@@ -66,8 +56,7 @@ void BitcoinExchange::rateCalculator(char *filename){
     std::string line;
     std::string inpData;
     float inpRate;
-
-    // int count = 0;
+    std::string tmp;
 
     inputData.open(filename, std::ifstream::in);
 
@@ -79,25 +68,19 @@ void BitcoinExchange::rateCalculator(char *filename){
     getline(inputData, line);
 
     while(getline(inputData, line)){
+        
         if (!strchr(line.c_str(), '-') || !strchr(line.c_str(), '|'))
 		{
 			std::cout << "Error: bad input => " << line << std::endl;
 			continue;
 		}
+        tmp = line;
         inpData = line.substr(0,10);
         inpRate = atof((line.substr(13, line.size() - 13)).c_str());
 
-        if(inpRate > 1000)
-		{
-			std::cout << "Error: too large a number." << std::endl;
+        if(!yearMountDayRate(inpData, inpRate))
 			continue;
-		}
-
-        if(inpRate < 1){
-            std::cout << "Error: not a positive number." << std::endl;
-			continue;
-        }
-
+		
         size_t position;
         while ((position = inpData.find('-')) != std::string::npos) {
             inpData.erase(position, 1);
@@ -105,24 +88,25 @@ void BitcoinExchange::rateCalculator(char *filename){
 
         int intData = atoi(inpData.c_str());
 
+
        
-       std::map<int , float > :: iterator it = _dataMap.begin();
+       std::map<int , float > :: iterator it = this->_dataMap.begin();
 
        for(; it != _dataMap.end(); it++)
        {
             if(intData == it->first)
             {
-                printData(line, inpRate);
-                // std::cout << "line " << line;
-                // std::cout << " = " << it->second * inpRate << "\n";
+                std::cout << tmp.substr(0,10);
+                std::cout << " => " << inpRate << " = ";
+                std::cout << it->second * inpRate << "\n";
                 break;
+              
             }
-            else if(intData < it->first){
-                it--;
-                printData(line, inpRate);
-                // std::cout <<"line " << line;
-                // std::cout << " = " << (--it)->second * inpRate << "\n";
-                it++;
+            else if(intData < it->first)
+            {
+                std::cout << tmp.substr(0,10);
+                std::cout << " => " << inpRate << " = ";
+                std::cout << (--it)->second * inpRate << "\n";
                 break;
             }
        }
@@ -132,6 +116,41 @@ void BitcoinExchange::rateCalculator(char *filename){
         
 }
 
-void printData(std::string str, float arf){
-    std::cout << str << "=>" << arf << " = ";
+int yearMountDayRate(std::string str, float rate){
+   int year;
+   int mount;
+   int day;
+
+   year = atoi(str.substr(0,4).c_str());
+   mount = atoi(str.substr(5,2).c_str());
+   day = atoi(str.substr(8,2).c_str());
+
+	if(year < 2009 || year > 2023)
+	{
+		std::cout << "Error: invalid year => " << str << std::endl;
+		return (0);
+	}
+	else if(mount < 1 || mount > 12)
+	{
+		std::cout << "Error: invalid mount => " << str << std::endl;
+		return (0);
+	}
+    else if(day < 1 || day > 31)
+    {
+        std::cout << "Error: invalid day => " << str << std::endl;
+        return (0);
+    } 
+    else if(rate < 0)
+    {
+        std::cout << "Error: not a positive number." << std::endl;
+        return (0);
+    }
+	else if(rate > 1000)
+	{
+		std::cout << "Error: too large a number." << std::endl;
+		return (0);
+	}
+	
+	return (1);
+
 }

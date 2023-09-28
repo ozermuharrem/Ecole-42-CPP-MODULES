@@ -15,7 +15,7 @@ $(NAME): $(OBJ)
 all: $(NAME)
 
 clean:
-	@rm -rf  $(NAME) *.dSYM
+	@rm -rf  $(NAME) *.dSYM build
 	@echo "\033[1;35m[🧹...Temizlendi...🧹]\033[0m"
 
 fclean: clean

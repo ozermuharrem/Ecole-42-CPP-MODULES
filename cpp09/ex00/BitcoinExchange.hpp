@@ -31,4 +31,4 @@ class BitcoinExchange{
 };
 
 
-void printData(std::string str, float arf);
+int yearMountDayRate(std::string str, float rate);

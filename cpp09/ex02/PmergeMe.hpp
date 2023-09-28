@@ -15,7 +15,7 @@ class PmergeMeDeque
 		PmergeMeDeque(const PmergeMeDeque &obj);
 		PmergeMeDeque &operator=(const PmergeMeDeque &obj);
 		std::deque<int> dgData;
-		void	addToDeq(std::deque<int> &con,char **argv);
+		void	addToDeq(std::deque<int> &dataDQ,char **argv);
 		void	mergeDeq(std::deque<int>& deq, int left, int middle, int right);
 		void	mergeSortDeq(std::deque<int>& deq, int left, int middle, int right);
 		void	mergeInsertionSortDeq(std::deque<int>& deq, int left, int right);

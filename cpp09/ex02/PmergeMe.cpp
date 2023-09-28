@@ -21,6 +21,51 @@ PmergeMeDeque &PmergeMeDeque::operator=(const PmergeMeDeque &obj)
 	return(*this);
 }
 
+void PmergeMeDeque::addToDeq(std::deque<int> &dataDQ,char **argv)
+{
+	int i = 1;
+	while (argv[i])
+	{
+		if (ft_isdigit(argv[i]))
+			dataDQ.push_back(atoi((const char *)argv[i]));
+		else
+		{
+			std::cout << "Error" << std::endl;
+			exit(1);
+		}
+		i++;
+	}
+}
+
+
+void	PmergeMeDeque::printDeque(std::deque<int> &pdeque)
+{
+	std::deque<int>::iterator it;
+
+	it = pdeque.begin();
+	while (it != pdeque.end())
+	{
+		std::cout << *it << " ";
+		it++;
+	}
+	std::cout << std::endl;
+}
+
+void	PmergeMeDeque::mergeInsertionSortDeq(std::deque<int> &deq, int left, int right) // 0 300 
+{
+	if (right - left <= 100){ 
+		
+		insertSortDeq(deq, left, right);
+	}
+	else
+	{
+		int middle = left + (right - left) / 2; // 75
+		mergeInsertionSortDeq(deq, left, middle);
+		mergeInsertionSortDeq(deq, middle + 1, right);
+		mergeSortDeq(deq, left, middle, right);
+	}
+}
+
 void PmergeMeDeque::insertSortDeq(std::deque<int>& deq, int left, int right){
 	for (int i = left + 1; i <= right; i++) 
 	{
@@ -74,59 +119,6 @@ void	PmergeMeDeque::mergeSortDeq(std::deque<int>& deq, int left, int middle, int
 		deq[k] = R[j];
 		j++;
 		k++;
-	}
-}
-
-void	PmergeMeDeque::mergeInsertionSortDeq(std::deque<int>& deq, int left, int right)
-{
-	/*
-		Eğer eleman sayısı çiftse, tam olarak orta noktayı elde ederiz.
-		Ancak eleman sayısı tekse, 1'e yakın bir değer elde ederiz ve bu da aslında orta noktanın bir adım ilerisine denk gelir.
-		Böyle durumlarda, middle + 1 kullanarak, tam olarak orta noktanın bir sonraki elemanını temsil ederiz.
-		Yani middle + 1, sağ yarıyı belirtir. Bu şekilde, veri kümesini ikiye bölerken, tam olarak iki eşit yarı elde ederiz ve
-		her birini ayrı ayrı sıralarız. Bu işlem Merge Sort algoritmasının doğru çalışması için önemlidir.
-	*/
-	if (right - left <= 100){ 
-		
-		insertSortDeq(deq, left, right);
-	}
-	else
-	{
-		// std::cout << "RIGHTTTTTT: " << right << " LEFTTTT " << left << std::endl;
-		int middle = left + (right - left) / 2;
-
-		mergeInsertionSortDeq(deq, left, middle);
-		mergeInsertionSortDeq(deq, middle + 1, right);
-		// std::cout << "LEFTTT: " << left << " RIGHTTT:" << right << std::endl;
-		mergeSortDeq(deq, left, middle, right);
-	}
-}
-
-void PmergeMeDeque::addToDeq(std::deque<int> &con,char **argv)
-{
-	int i = 1;
-	while (argv[i])
-	{
-		if (ft_isdigit(argv[i]))
-			con.push_back(atoi((const char *)argv[i]));
-		else
-		{
-			std::cout << "Error" << std::endl;
-			exit(1);
-		}
-		i++;
-	}
-}
-
-void	PmergeMeDeque::printDeque(std::deque<int> &pdeque)
-{
-	std::deque<int>::iterator it;
-
-	it = pdeque.begin();
-	while (it != pdeque.end())
-	{
-		std::cout << *it << " ";
-		++it;
 	}
 }
 
@@ -215,25 +207,17 @@ void PmergeMeVec::addToVector(std::vector<int> &vec,char **arg)
 }
 
 void	PmergeMeVec::mergeInsertionSortVec(std::vector<int>& vec, int left, int right) {
-	/*
-		Eğer eleman sayısı çiftse, tam olarak orta noktayı elde ederiz.
-		Ancak eleman sayısı tekse, 1'e yakın bir değer elde ederiz ve bu da aslında orta noktanın bir adım ilerisine denk gelir.
-		Böyle durumlarda, middle + 1 kullanarak, tam olarak orta noktanın bir sonraki elemanını temsil ederiz.
-		Yani middle + 1, sağ yarıyı belirtir. Bu şekilde, veri kümesini ikiye bölerken, tam olarak iki eşit yarı elde ederiz ve
-		her birini ayrı ayrı sıralarız. Bu işlem Merge Sort algoritmasının doğru çalışması için önemlidir.
-	*/
+
 	if (right - left <= 100){ 
 		
 		vectorInsertSort(vec, left, right);
 	}
 	else
 	{
-		// std::cout << "RIGHTTTTTT: " << right << " LEFTTTT " << left << std::endl;
 		int middle = left + (right - left) / 2;
 
 		mergeInsertionSortVec(vec, left, middle);
 		mergeInsertionSortVec(vec, middle + 1, right);
-		// std::cout << "LEFTTT: " << left << " RIGHTTT:" << right << std::endl;
 		mergeSortVector(vec, left, middle, right);
 	}
 }
@@ -248,4 +232,5 @@ void	PmergeMeVec::printVec(std::vector<int> &pvector)
 		std::cout << *it << " ";
 		++it;
 	}
+	std::cout << std::endl; //!
 }

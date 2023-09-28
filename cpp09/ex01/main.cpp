@@ -7,7 +7,7 @@ int main(int argc, char **argv)
     rpn.my_checker(argc, argv);
 
     std::stack<int> s;
-    std::string line = argv[1];
+    std::string line = argv[1]; // "7 7 * 7 -"
 
     std::string::iterator it = line.begin();
     std::string num = "";
@@ -25,11 +25,6 @@ int main(int argc, char **argv)
         }
         else if (isdigit(token))
         {
-            if (!num.empty())
-            {
-                s.push(std::stoi(num));
-                num = "";
-            }
             num += token;
         }
         else
@@ -42,7 +37,7 @@ int main(int argc, char **argv)
             int first = s.top();
             s.pop();
 
-            int second = s.top();
+            int second = s.top(); // stack'in en üsttek elemanını okur
             s.pop();
             if (first == 0 && rpn.real_token == '/')
             {
